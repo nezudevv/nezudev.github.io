@@ -7,12 +7,29 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-   helooooooo 
+        <button id="fetchButton">Make Fetch Request</button>
     </body>
 
         <script>
-            const response = await fetch("localhost:49999");
-            const res = await response.json();
-            console.log("hello", res)
+            document.getElementById('fetchButton').addEventListener('click', function() {
+                // Make fetch request when button is clicked
+                fetch('http://localhost:49999') // Change URL to your Rust app's endpoint
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Handle response data
+                        console.log('Response data:', data);
+                        alert('Response data: ' + JSON.stringify(data));
+                    })
+                    .catch(error => {
+                        // Handle errors
+                        console.error('Fetch error:', error);
+                        alert('Fetch error: ' + error.message);
+                    });
+            });
         </script>
 </html>
