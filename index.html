@@ -1,35 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <button id="fetchButton">Make Fetch Request</button>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <button id="fetchButton">Make Fetch Request</button>
+  </body>
 
-        <script>
-            document.getElementById('fetchButton').addEventListener('click', function() {
-                // Make fetch request when button is clicked
-                fetch('http://localhost:49999') // Change URL to your Rust app's endpoint
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Handle response data
-                        console.log('Response data:', data);
-                        alert('Response data: ' + JSON.stringify(data));
-                    })
-                    .catch(error => {
-                        // Handle errors
-                        console.error('Fetch error:', error);
-                        alert('Fetch error: ' + error.message);
-                    });
-            });
-        </script>
+  <script>
+    document
+      .getElementById("fetchButton")
+      .addEventListener("click", function () {
+        // Make fetch request when button is clicked
+        fetch("http://localhost:49999", {
+          method: "POST",
+        }) // Change URL to your Rust app's endpoint
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Handle response data
+            console.log("Response data:", data);
+            alert("Response data: " + JSON.stringify(data));
+          })
+          .catch((error) => {
+            // Handle errors
+            console.error("Fetch error:", error);
+            alert("Fetch error: " + error.message);
+          });
+      });
+  </script>
 </html>
